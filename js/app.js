@@ -27,7 +27,7 @@ function getCocktails(e) {
                 if(cocktails.cocktails.drinks === null) {
                     ui.displayMessage('No drinks found!', 'danger');
                 } else {
-                    console.log(cocktails.cocktails.drinks)
+                    ui.displayDrinksWithIngredients(cocktails.cocktails.drinks);
                 }
             });
     } else {
