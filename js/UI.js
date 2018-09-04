@@ -3,36 +3,38 @@ class UI {
     // Display drinks with ingredients
     displayDrinksWithIngredients(drinks) {
         // Show results
-        const resultsWrapper = document.querySelector('results-wrapper');
+        const resultsWrapper = document.querySelector('.results-wrapper');
         resultsWrapper.style.display = 'block';
 
         // Insert results into wrapper
         const resultsDiv = document.querySelector('#results');
 
         drinks.forEach(drink => {
+            console.log(drink);
             resultsDiv.innerHTML += `
                 <div class="col-md-6">
                     <div class="card my-3">
-                        <img class="card-img-top" src="" alt=""/>
+                        <img class="card-img-top" src="${drink.strDrinkThumb}" alt="${drink.strDrink}"/>
 
                         <div class="card-body">
-                            <h2 class="card-title text-center"></h2>
+                            <h2 class="card-title text-center">${drink.strDrink}</h2>
                             <p class="card-text font-weight-bold">Instructions: </p>
                             <p class="card-text">
-                            
+                                ${drink.strInstructions}
                             </p>
                             <p class="card-text">
                                 <ul class="list-group">
-                                    <li class="list-group-item alert alert-danger">Ingredients</li>
+                                    <li style="background-color: #d9534f; color: #fff" class="list-group-item">Ingredients</li>
+                                    ${this.displayIngredients(drink)}
                                 </ul>
                             </p>
-                            <p class="card-text font-weight-bold">Extra Info: </p>
+                            <p class="card-text font-weight-bold">Extra Information: </p>
                             <p class="card-text">
                                 <span class="badge badge-pill badge-success">
-                                
+                                    ${drink.strAlcoholic}
                                 </span>
                                 <span class="badge badge-pill badge-warning">
-                                    Category
+                                    Category: ${drink.strCategory}
                                 </span>
                             </p>
                         </div>
@@ -42,7 +44,32 @@ class UI {
         })
     }
 
+    // Display ingredients and measurements
+    displayIngredients(drink) {
+        // console.log(drink);
 
+        let ingredients = [];
+        for(let i = 1 ; i < 16; i++) {
+            const ingredientMeasure = {};
+            if( drink[`strIngredient${i}`] !== '' && drink[`strIngredient${i}`] !== null ) {
+                ingredientMeasure.ingredient = drink[`strIngredient${i}`];
+                ingredientMeasure.measure = drink[`strMeasure${i}`];
+                ingredients.push(ingredientMeasure);
+            }
+        }
+
+        // console.log('ingredients',ingredients);
+
+        // Build template
+        let ingredientsTemplate = '';
+        ingredients.forEach(ing => {
+            ingredientsTemplate += `
+                <li class="list-group-item">${ing.ingredient} - ${ing.measure}</li>
+            `;
+        });
+        console.log('ingredients',ingredients);
+        return ingredientsTemplate;
+    }
 
     // Display message to user
     displayMessage(message, className){
