@@ -21,9 +21,22 @@ function getCocktails(e) {
 
     // Check if searchTerm is not empty
     if(searchTerm.trim() !== '') {
+        // Server response from promise
+        let serverResponse;
+
+        // Type of search (ingredients, cocktails, or name)
+        const type = document.querySelector('#type').value;
+
+        // Evaluate the type of method and then execute the query
+        switch(type) {
+            case 'name': 
+                serverResponse = cocktailDB.getDrinksByName(searchTerm);
+                break;
+                
+        }
+
         // Query by the name of the drink
-        cocktailDB.getDrinksByName(searchTerm)
-            .then(cocktails => {
+        serverResponse.then(cocktails => {
                 if(cocktails.cocktails.drinks === null) {
                     ui.displayMessage('No drinks found!', 'danger');
                 } else {
