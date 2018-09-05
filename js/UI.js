@@ -1,4 +1,28 @@
 class UI {
+    // Display drink without ingredients
+    displayDrinks(drinks) {
+        // Show results
+        const resultsWrapper = document.querySelector('.results-wrapper');
+        resultsWrapper.style.display = 'block';
+
+        // Insert results into wrapper
+        const resultsDiv = document.querySelector('#results');
+
+        drinks.forEach(drink => {
+            resultsDiv.innerHTML += `
+                <div class="col-md-4">
+                    <div class="card my-3">
+                        <img class="card-img-top" src="${drink.strDrinkThumb}" alt="${drink.strDrink}"/>
+                        <div class="card-body">
+                            <h2 class="card-title text-center">${drink.strDrink}</h2>
+                            <a class="btn btn-success" href="#" data-toggle="modal" data-id="${drink.idDrink}">Get Drink</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        })
+    }
+
 
     // Display drinks with ingredients
     displayDrinksWithIngredients(drinks) {
@@ -10,7 +34,7 @@ class UI {
         const resultsDiv = document.querySelector('#results');
 
         drinks.forEach(drink => {
-            console.log(drink);
+            // console.log(drink);
             resultsDiv.innerHTML += `
                 <div class="col-md-6">
                     <div class="card my-3">
@@ -92,5 +116,11 @@ class UI {
         setTimeout(() => {
             div.remove();
         }, 3000);
+    }
+
+
+    // Clear previous results
+    clearResults() {
+        const resultsDiv = document.querySelector('#results').innerHTML = '';
     }
 }
