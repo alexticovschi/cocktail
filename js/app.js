@@ -9,6 +9,12 @@ function eventListeners() {
     if(searchForm) {
         searchForm.addEventListener('submit', getCocktails);
     }
+
+    // resultsDiv listener
+    const resultsDiv = document.querySelector('#results');
+    if(resultsDiv) {
+        resultsDiv.addEventListener('click', resultsDelegation);
+    }
 }
 
 eventListeners();
@@ -59,4 +65,19 @@ function getCocktails(e) {
         ui.displayMessage('Please add something into the form', 'danger');
     }
     
+}
+
+// Delegation for the results area
+function resultsDelegation(e) {
+    e.preventDefault();
+
+    if(e.target.classList.contains('get-drink')) {
+        // console.log(e.target.getAttribute('data-id'))
+        cocktailDB.getSingleDrink(e.target.dataset.id)
+            .then(data => {
+                // console.log(data.cocktail.drinks)
+                // Displays single drink into modal
+                ui.displaySingleDrink(data.cocktail.drinks[0]);
+            });
+    }
 }

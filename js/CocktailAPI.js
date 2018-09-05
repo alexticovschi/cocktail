@@ -21,4 +21,13 @@ class CocktailAPI {
 
         return { cocktails }; 
     }
+
+    // Get single drink 
+    async getSingleDrink(id) {
+        const apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+
+        const cocktail = await apiResponse.json();
+
+        return { cocktail }; 
+    }
 }

@@ -60,6 +60,11 @@ thead {
     color: white!important;
 }
 
+.modal-body h3 {
+    background-color: #28a745;
+    color: #fff;
+}
+
 
 h1 {
     font-family: 'Raleway', sans-serif;
