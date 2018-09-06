@@ -45,6 +45,8 @@ function getCocktails(e) {
                 serverResponse = cocktailDB.getDrinksByIngredient(searchTerm);
             case 'category':
                 serverResponse = cocktailDB.getDrinksByCategory(searchTerm);
+            case 'alcohol':
+                serverResponse = cocktailDB.getAlcoholicDrinks(searchTerm);
         }
 
         // Clear previous results

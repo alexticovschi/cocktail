@@ -49,4 +49,14 @@ class CocktailAPI {
 
         return { cocktails }; 
     }
+
+    // Get alcoholic or non-alcoholic drinks
+    async getAlcoholicDrinks(term) {
+        // Search by alcoholic or non-alcoholic drinks
+        const apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${term}`);
+
+        const cocktails = await apiResponse.json();
+
+        return { cocktails }; 
+    }
 }
