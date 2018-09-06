@@ -1,4 +1,26 @@
 class UI {
+    // Show all the drink categories
+    showCategories() {
+        const categories = cocktailDB.getDrinkCategories()
+            .then(data => {
+                const catList = data.categories.drinks;
+
+                // Append the first option without a value
+                const firstOption = document.createElement('option');
+                firstOption.textContent = '- Select -';
+                document.querySelector('#search').appendChild(firstOption);
+
+                // Append into <select>
+                catList.forEach(category => {
+                    const option = document.createElement('option');
+                    option.textContent = category.strCategory;
+                    option.value = category.strCategory.split(' ').join('_');
+                    document.querySelector('#search').appendChild(option);
+                });
+            });
+    }
+
+
     // Display drink without ingredients
     displayDrinks(drinks) {
         // Show results
