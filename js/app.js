@@ -43,7 +43,8 @@ function getCocktails(e) {
                 break;
             case 'ingredient':
                 serverResponse = cocktailDB.getDrinksByIngredient(searchTerm);
-                
+            case 'category':
+                serverResponse = cocktailDB.getDrinksByCategory(searchTerm);
         }
 
         // Clear previous results
