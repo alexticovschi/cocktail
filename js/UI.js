@@ -1,7 +1,7 @@
 class UI {
     // Show all the drink categories
     showCategories() {
-        const categories = cocktailDB.getDrinkCategories()
+        const categories = cocktailAPI.getDrinkCategories()
             .then(data => {
                 const catList = data.categories.drinks;
 
@@ -116,7 +116,7 @@ class UI {
                 <li class="list-group-item">${ing.ingredient} - ${ing.measure}</li>
             `;
         });
-        console.log('ingredients',ingredients);
+        // console.log('ingredients',ingredients);
         return ingredientsTemplate;
     }
 

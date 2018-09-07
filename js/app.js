@@ -1,6 +1,7 @@
 // Instantiate all classes
 const ui = new UI();
-const cocktailDB = new CocktailAPI();
+const cocktailAPI = new CocktailAPI();
+const cocktailDB = new CocktailDB();
 
 // Create event listeners
 function eventListeners() {
@@ -13,7 +14,7 @@ function eventListeners() {
         searchForm.addEventListener('submit', getCocktails);
     }
 
-    // resultsDiv listener
+    //  resultsDiv listener
     const resultsDiv = document.querySelector('#results');
     if(resultsDiv) {
         resultsDiv.addEventListener('click', resultsDelegation);
@@ -39,16 +40,16 @@ function getCocktails(e) {
         // Evaluate the type of method and then execute the query
         switch(type) {
             case 'name': 
-                serverResponse = cocktailDB.getDrinksByName(searchTerm);
+                serverResponse = cocktailAPI.getDrinksByName(searchTerm);
                 break;
             case 'ingredient':
-                serverResponse = cocktailDB.getDrinksByIngredient(searchTerm);
+                serverResponse = cocktailAPI.getDrinksByIngredient(searchTerm);
                 break;
             case 'category':
-                serverResponse = cocktailDB.getDrinksByCategory(searchTerm);
+                serverResponse = cocktailAPI.getDrinksByCategory(searchTerm);
                 break;
             case 'alcohol':
-                serverResponse = cocktailDB.getAlcoholicDrinks(searchTerm);
+                serverResponse = cocktailAPI.getAlcoholicDrinks(searchTerm);
                 break;
         }
 
@@ -82,7 +83,7 @@ function resultsDelegation(e) {
 
     if(e.target.classList.contains('get-drink')) {
         // console.log(e.target.getAttribute('data-id'))
-        cocktailDB.getSingleDrink(e.target.dataset.id)
+        cocktailAPI.getSingleDrink(e.target.dataset.id)
             .then(data => {
                 // console.log(data.cocktail.drinks)
                 // Displays single drink into modal
@@ -99,6 +100,21 @@ function resultsDelegation(e) {
         } else {
             // add the class
             e.target.classList.add('is-favorite');
+
+            // console.log(e.target.parentElement);
+            // Get card info
+            const cardBody = e.target.parentElement;
+ 
+            const drinkInfo = {
+                id: e.target.dataset.id,
+                name: cardBody.querySelector('.card-title').textContent,
+                image: cardBody.querySelector('.card-img-top').src
+            }
+
+            // console.log(drinkInfo);
+
+            // Store favorite drink in localStorage
+            cocktailDB.saveDrinksToLocalStorage(drinkInfo);
         }
     }
 }
