@@ -145,9 +145,12 @@ function documentReady() {
                     });
             }
 
-            // Delete element from DOM
             if(e.target.classList.contains('remove-drink')) {
+                // Delete element from DOM
                 ui.removeDrink(e.target.parentElement.parentElement);
+
+                // Remove from the localStorage
+                cocktailDB.removeFromLocalStorage(e.target.dataset.id);
             }
         })
     }
