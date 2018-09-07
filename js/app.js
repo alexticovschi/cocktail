@@ -89,6 +89,18 @@ function resultsDelegation(e) {
                 ui.displaySingleDrink(data.cocktail.drinks[0]);
             });
     }
+
+    if(e.target.classList.contains('favorite-btn')) {
+        // console.log(e.target.dataset.id);
+
+        if(e.target.classList.contains('is-favorite')) {
+            // remove the class
+            e.target.classList.remove('is-favorite');
+        } else {
+            // add the class
+            e.target.classList.add('is-favorite');
+        }
+    }
 }
 
 // Document Ready
