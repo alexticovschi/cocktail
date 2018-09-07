@@ -131,5 +131,24 @@ function documentReady() {
     if(favoritesTable) {
         const drinks = cocktailDB.getDrinksFromLocalStorage();
         ui.displayFavorites(drinks);
+
+        // Adding event delegation when View or Remove buttons are clicked 
+        favoritesTable.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Open modal when View button is clicked
+            if(e.target.classList.contains('get-drink')) {
+                cocktailAPI.getSingleDrink(e.target.dataset.id)
+                    .then(data => {
+                        // Displays single drink into modal
+                        ui.displaySingleDrink(data.cocktail.drinks[0]);
+                    });
+            }
+
+            // Delete element from DOM
+            if(e.target.classList.contains('remove-drink')) {
+                ui.removeDrink(e.target.parentElement.parentElement);
+            }
+        })
     }
 }

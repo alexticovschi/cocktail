@@ -190,6 +190,11 @@ class UI {
         })
     }
 
+    // Delete from DOM
+    removeDrink(element) {
+        element.remove();
+    }
+
     // Clear previous results
     clearResults() {
         const resultsDiv = document.querySelector('#results').innerHTML = '';
