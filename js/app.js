@@ -125,4 +125,11 @@ function documentReady() {
     if(searchCategory) {
         ui.showCategories();
     }
+
+    // Favorites page
+    const favoritesTable = document.querySelector('#favorites');
+    if(favoritesTable) {
+        const drinks = cocktailDB.getDrinksFromLocalStorage();
+        ui.displayFavorites(drinks);
+    }
 }

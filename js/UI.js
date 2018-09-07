@@ -161,6 +161,35 @@ class UI {
     }
 
 
+    // Displays favorite drinks from localStorage
+    displayFavorites(favoriteDrinks) {
+        const favoritesTable = document.querySelector('#favorites tbody');
+
+        favoriteDrinks.forEach(drink => {
+            const tr = document.createElement('tr');
+
+            tr.innerHTML = `
+                <td>
+                    <img src="${drink.image}" alt="${drink.name}" width=100/>
+                </td>
+                <td>${drink.name}</td>
+                <td>
+                    <a 
+                        href="#" 
+                        data-toggle="modal" 
+                        data-target="#drink"
+                        data-id="${drink.id}"
+                        class="btn btn-success get-drink">View</a>
+                </td>
+                <td>
+                    <button data-id="${drink.id}" class="btn btn-danger remove-drink">Remove</button>
+                </td>
+            `;
+
+            favoritesTable.appendChild(tr);
+        })
+    }
+
     // Clear previous results
     clearResults() {
         const resultsDiv = document.querySelector('#results').innerHTML = '';
