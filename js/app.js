@@ -97,6 +97,9 @@ function resultsDelegation(e) {
         if(e.target.classList.contains('is-favorite')) {
             // remove the class
             e.target.classList.remove('is-favorite');
+
+            // Remove element from localStorage
+            cocktailDB.removeFromLocalStorage(e.target.dataset.id);
         } else {
             // add the class
             e.target.classList.add('is-favorite');
@@ -121,6 +124,9 @@ function resultsDelegation(e) {
 
 // Document Ready
 function documentReady() {
+    // Display onload favorites from localStorage
+    ui.isFavorite();
+
     const searchCategory = document.querySelector('.search-category');
     if(searchCategory) {
         ui.showCategories();

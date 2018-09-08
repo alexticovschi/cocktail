@@ -34,7 +34,7 @@ class UI {
             resultsDiv.innerHTML += `
                 <div class="col-lg-4 col-md-6">
                     <div class="card my-3">
-                        <button data-toggle="tooltip" title="Add to Favorites" type="button" data-id="${drink.idDrink}" class="favorite-btn btn btn-outline-info">&starf;</button>
+                        <button type="button" data-id="${drink.idDrink}" class="favorite-btn btn btn-outline-info">&starf;</button>
 
                         <img class="card-img-top" src="${drink.strDrinkThumb}" alt="${drink.strDrink}"/>
                         <div class="card-body">
@@ -44,7 +44,9 @@ class UI {
                     </div>
                 </div>
             `;
-        })
+        });
+
+        this.isFavorite();
     }
 
 
@@ -62,7 +64,7 @@ class UI {
             resultsDiv.innerHTML += `
                 <div class="col-md-6">
                     <div class="card my-3">
-                        <button data-toggle="tooltip" title="Add to Favorites" type="button" data-id="${drink.idDrink}" class="favorite-btn btn btn-outline-info"> &starf;</button>
+                        <button type="button" data-id="${drink.idDrink}" class="favorite-btn btn btn-outline-info"> &starf;</button>
                         <img class="card-img-top" src="${drink.strDrinkThumb}" alt="${drink.strDrink}"/>
 
                         <div class="card-body">
@@ -90,7 +92,9 @@ class UI {
                     </div>
                 </div>
             `;
-        })
+        });
+
+        this.isFavorite();
     }
 
     // Display ingredients and measurements
@@ -193,6 +197,24 @@ class UI {
     // Delete from DOM
     removeDrink(element) {
         element.remove();
+    }
+
+
+    // Add class when cocktail is added to favorites
+    isFavorite() {
+        const drinks = cocktailDB.getDrinksFromLocalStorage();
+
+        drinks.forEach(drink => {
+            // Extract the id property from the object
+            let { id } = drink;
+
+            // Select favorite drink
+            let favoriteDrink = document.querySelector(`[data-id="${id}"]`);
+
+            if(favoriteDrink) {
+                favoriteDrink.classList.add('is-favorite');
+            } 
+        })
     }
 
     // Clear previous results
