@@ -33,7 +33,7 @@ class UI {
         drinks.forEach(drink => {
             resultsDiv.innerHTML += `
                 <div class="col-lg-4 col-md-6">
-                    <div class="card my-3">
+                    <div class="card my-3 wow zoomIn">
                         <button type="button" data-id="${drink.idDrink}" class="favorite-btn btn btn-outline-info">&starf;</button>
 
                         <img class="card-img-top" src="${drink.strDrinkThumb}" alt="${drink.strDrink}"/>
@@ -63,7 +63,7 @@ class UI {
             // console.log(drink);
             resultsDiv.innerHTML += `
                 <div class="col-md-6">
-                    <div class="card my-3">
+                    <div class="card my-3 wow zoomIn">
                         <button type="button" data-id="${drink.idDrink}" class="favorite-btn btn btn-outline-info"> &starf;</button>
                         <img class="card-img-top" src="${drink.strDrinkThumb}" alt="${drink.strDrink}"/>
 
@@ -171,7 +171,8 @@ class UI {
 
         favoriteDrinks.forEach(drink => {
             const tr = document.createElement('tr');
-
+            tr.classList.add('wow');
+            tr.classList.add('zoomIn');
             tr.innerHTML = `
                 <td>
                     <img src="${drink.image}" alt="${drink.name}" width=100/>
